@@ -1,0 +1,10 @@
+# Binary executables
+*.o
+*.out
+*.exe
+*.so
+*.dylib
+*.dll
+
+# Common executable names (without extension)
+a.out
