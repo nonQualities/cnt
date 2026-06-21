@@ -14,15 +14,11 @@ references : <ol>
 It is customery to express big integer n in some predetermined base B, and store the B-ary digits of n in an array of integers, so chosen that each B-ary digit fit into a single built-in integer type.
 
 >[!Note]
-> In 32 bit machines, the base B is generally taken as 2^32
-> In 64 bit machines, the base is generally taken as 2^64
+> In 32 bit machines, the base B is generally taken as $2^{32}$. \
+> In 64 bit machines, the base is generally taken as $2^{64}$
 
 An integer thus represented is called, a multiprecision integer.
-                                       --------------------------
-
-For a computer scientist, the most natural way to think about base conversion is not in terms of positional notation, but in terms of **storage**.
-
-Suppose a user types the decimal string
+For computer science purposes, the most natural way to think about base conversion is definitely not in terms of positional notation, as it is simpler to think in terms of **storage** by many folds. Suppose a user types the decimal string
 
 ```text
 123454321
@@ -44,7 +40,7 @@ This deceptively simple recurrence is the entire algorithm.
 
 The only complication is that (n) is stored as an array of base-(B) digits rather than as a machine integer. Therefore the operations "multiply by 10" and "add (d)" must be performed on that array.
 
-For example, suppose (B=256) and we have already processed
+For example, suppose (B=256) and we have already **processed**
 
 ```text
 1234
