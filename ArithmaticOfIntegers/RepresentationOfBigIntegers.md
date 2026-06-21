@@ -1,9 +1,19 @@
 REPRESENTATION OF BIG INTEGERS
 --------------------------------
+<small> author: Ronit Choudhury <br>
+date: 21/06/26 <br>
+references : <ol> 
+                <li> <a href="https://www.sunshine2k.de/articles/coding/biguint/bigunsignedint.html"> Big Unsigned Ints </a>
+                <li> <a href="https://maths-people.anu.edu.au/~brent/pub/pub226.html"> Modern Computer Arithmetic </a>
+            </ol>
+</small>
 
+
+-----
 
 It is customery to express big integer n in some predetermined base B, and store the B-ary digits of n in an array of integers, so chosen that each B-ary digit fit into a single built-in integer type.
 
+>[!Note]
 > In 32 bit machines, the base B is generally taken as 2^32
 > In 64 bit machines, the base is generally taken as 2^64
 
@@ -90,4 +100,21 @@ for each digit d in the input string:
 The elegance of the method lies in the fact that it is independent of the target base. Whether the internal radix is 256, (2^{32}), (10^9), or any other convenient value, the algorithm remains unchanged. Only the implementation of multiplication and addition on the digit array differs. The mathematical idea is always the same: every new decimal digit extends the current value by the transformation
 
 $n \leftarrow 10n+d$
+
+### For Example:
+Q: Convert 12343 to base-256:
+Soln: 
+
+- $1 \times 10 + 0 = 1$
+- $1\times 10 + 2 = 12$
+- $12\times 10 + 3 = 123$
+- $123\times 10 = 1230$ which is larger than 255, 
+  - therefore, we must convert $1230$ to base-256 beofore adding 4.
+  - Divide $1230$ by $256$ until remainder is less than the `base` (in our case 256)
+  - $\therefore$ $4\times 256+206 = 1230$ where, r=206 < base=256 : $(4, 206)_{256}$.
+  - now we add the next digit from the number $1234$ which is 4, as we have already added till 3: $(4, 206)_{256} + 4 = (4,210)_{256}$
+- for the last digit, again we follow the same procedure: since we converted till 4,i.e, 1234, we do:
+  - $1234\times 10 = 12340$ convert 12340 into base 256 which would yeild: $12340 = 48 \times 256+52$ 
+  - $\implies 12340 \equiv (48,52)_{256}$ adding the last digit 3 to it makes: $(48, 55)_{256}$
+
 
