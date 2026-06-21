@@ -112,5 +112,3 @@ Soln:
 - for the last digit, again we follow the same procedure: since we converted till 4,i.e, 1234, we do:
   - $1234\times 10 = 12340$ convert 12340 into base 256 which would yeild: $12340 = 48 \times 256+52$ 
   - $\implies 12340 \equiv (48,52)_{256}$ adding the last digit 3 to it makes: $(48, 55)_{256}$
-
-
