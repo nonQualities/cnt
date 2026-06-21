@@ -33,11 +33,12 @@ Similar to addition, here we must handle the borrows, denoted by $c_{in}, c_{out
 - If $c_{in} = 0$: $c_{out} = 1$ iff $a_i \lneq b_i$
 - If $c_{in} = 1$: $c_{out} = 1$ iff $a_i \leq b_i$
 
->[!Note] Even in the case of output borrow, one can simple compute the modular substraction and keep returned valued as the output word, given the CPU support 2's-compliment arithmetic.
+>[!Note]
+>Even in the case of output borrow, one can simple compute the modular substraction and keep returned valued as the output word, given the CPU support 2's-compliment arithmetic.
 > If not: $a_i-b_i-c_{in}$ can be computed $a_i + (B-b_i-c_{in})$ where,$(B-b_i-c_{in})$ is the bitwise complement of $b_i$ and $B-b_i$ is one more than that.
 
 ## Multiplication:
-[I have skipped multiplication for now, it looked very complicated] \
+[I have skipped multiplication for now, it seemed very complicated] \
 . . . \
 . . . 
 
@@ -50,4 +51,4 @@ $\forall a,b \in \Z \wedge 0\leq r\leq |b| -1$ and $q$ and $r$ are unique.
 
 Computing q and r involves efficiently, guessing the B-nary digits of q from the most significant end. In order to do that, we need to *normalize* $b$, making it satisfy the assumption that **most significant word of $b$ is atleast as large as $B/2$**. If the condition not satisfied, we multiply both $a$ and $b$ by a suitable power of 2 and we shall do the same with $r$ too. 
 
-...[to be completed later.]
+...[TODO: Complete the rest of this]
