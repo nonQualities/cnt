@@ -87,5 +87,53 @@ These formulas involve multipliaction and divisins by small integers. Multiplyin
 
 In general, Toom-3 runs in $O(n^{log(2k-1)/logk})$, which can be improved by taking K adaptively, optimal is shown to be $k=2^{\lceil \log r \rceil}$ where each input is broken in $k$ parts each of size $r$. This gives an asymptotic running time of $O(n2^{\sqrt{\log n}})$ for the optimal Toom-Cook method. **Unfortunately, practical implementation do not behave well for $k\geq 4$**.
 
+```
+function ToomCook3(M, N):
+    if length(M) < threshold or length(N) < threshold:
+        return SchoolbookMultiply(M, N)
+
+    // 1. Splitting
+    B = base^(ceil(max(length(M), length(N)) / 3))
+    
+    a2, a1, a0 = split M into three pieces relative to B (M = a2*B^2 + a1*B + a0)
+    b2, b1, b0 = split N into three pieces relative to B (N = b2*B^2 + b1*B + b0)
+
+    // 2. Evaluation
+    p_0 = a0
+    p_1 = a2 + a1 + a0
+    p_neg1 = a2 - a1 + a0
+    p_2 = 4*a2 + 2*a1 + a0
+    p_inf = a2
+
+    q_0 = b0
+    q_1 = b2 + b1 + b0
+    q_neg1 = b2 - b1 + b0
+    q_2 = 4*b2 + 2*b1 + b0
+    q_inf = b2
+
+    // 3. Pointwise Multiplication
+    r_0 = ToomCook3(p_0, q_0)
+    r_1 = ToomCook3(p_1, q_1)
+    r_neg1 = ToomCook3(p_neg1, q_neg1)
+    r_2 = ToomCook3(p_2, q_2)
+    r_inf = ToomCook3(p_inf, q_inf)
+
+    // 4. Interpolation
+    c0 = r_0
+    c4 = r_inf
+    
+    // Intermediate exact linear combinations
+    c2 = (r_1 + r_neg1) / 2 - c0 - c4
+    v1 = (r_1 - r_neg1) / 2
+    v2 = (r_2 - c0 - 16*c4 - 4*c2 - v1) / 3
+    
+    c3 = v2
+    c1 = v1 - c3
+
+    // 5. Recomposition
+    Result = c4*B^4 + c3*B^3 + c2*B^2 + c1*B + c0
+    return Result
+```
+
 
 ## FFT-Based (Fast Fourier Transform) Multiplication 
