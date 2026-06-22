@@ -53,6 +53,7 @@ $$a= A_2R^2+A_1R+A_0 \\ b=B_2R^2+B_1R+B_0$$
 where $R=B^m$. The product $c=ab$ can be expressed as the polynomia:
 $$c=C_4R^4+C_3R^3+C_2R^2+C_1R+C_0 --- (I)$$
 where, the coeffs:
+
 $$\begin{align}
    C_4 = A_2B_2\\ C_3=A_2B_1+A_1B_2 \\ C_2=A_2b_0+A_1B_1+A_0B_2 \\ C_1 = A_1B_0+A_0B_1\\C_0=A_0B_0 
 \end{align}$$
@@ -72,8 +73,7 @@ $$\begin{pmatrix}
 \end{pmatrix}
 \begin{pmatrix}
     C_4\\ C_3\\C_2\\C_1\\C_0
-\end{pmatrix}
-$$ 
+\end{pmatrix}$$ 
 
 These formulas involve multipliaction and divisins by small integers. Multiplying or dividing an $m$-digit multiple-precision intger by a single precision integer can be completed in $O(m)$ time, so this is no trouble. 
 
