@@ -13,7 +13,7 @@ Schoolbook methods of addition and substraction takes $O(n)$ time, and cannot be
   - $x= 2^{n/2} x_h + x_l$ and $y=2^{n/2}y_h + y_l$
     - We assume that n is even, for simplicity.
   - Multiplying by $2^{n/2}$ is effectively shifts the number $x_h$ by $n/2$ bits to the left and the shifted bits are padded with 0s and adding $x_l$ results in the same original integer $x$. Same goes for y.
-  - $\implies x.y = $(2^{n/2} x_h + x_l)$ . $(2^{n/2}y_h + y_l)$
+  - $\implies x.y =$ $(2^{n/2} x_h + x_l)$ . $(2^{n/2}y_h + y_l)$
     - $\implies x.y = 2^{n/2}x_hy_h + 2^{n/2}x_hy_l+2^{n/2}x_ly_h+x_ly_l$
     -  $\implies x.y = 2^{n/2}x_hy_h + 2^{n/2}(x_hy_l+x_ly_h)+x_ly_l$
   
