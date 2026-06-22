@@ -47,4 +47,37 @@ fun KOM(x,y):
     return (2^n)*hh+2^(n/2)*(n-hh-ll)+ll
 ```
 
-## Tim-Cook Multiplication:
+## Toom-Cook (Toom-3) Multiplication:
+Let $a$ and $b$ be $n$-digit integers. Take $m=\lceil(n/3)\rceil$ and write: 
+$$a= A_2R^2+A_1R+A_0 \\ b=B_2R^2+B_1R+B_0$$
+where $R=B^m$. The product $c=ab$ can be expressed as the polynomia:
+$$c=C_4R^4+C_3R^3+C_2R^2+C_1R+C_0 --- (I)$$
+where, the coeffs:
+$$\begin{align}
+   C_4 = A_2B_2\\ C_3=A_2B_1+A_1B_2 \\ C_2=A_2b_0+A_1B_1+A_0B_2 \\ C_1 = A_1B_0+A_0B_1\\C_0=A_0B_0 
+\end{align}$$
+here, instead of computing nine subproducts, $A_iB_j$ for $i,j=0,1,2$ we compute only five coeff of $n/3$-digit integers. We calculate for $c(k) (from \dashrightarrow I)$ at specific points of $k$ namely $k=\infty,0,1,-1,-2$, lead to the following:
+$$\begin{pmatrix}
+    c(\infin)\\
+    c(0)\\
+    c(1)\\
+    c(-1)\\
+    c(-2)
+\end{pmatrix} = \begin{pmatrix}
+    1 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 1 \\
+    1 & 1 & 1 & 1 & 1 \\
+    1 & -1 & 1 & -1 & 1 \\
+    16 & -8 & 4 & -2 & 1
+\end{pmatrix}
+\begin{pmatrix}
+    C_4\\ C_3\\C_2\\C_1\\C_0
+\end{pmatrix}
+$$ 
+
+These formulas involve multipliaction and divisins by small integers. Multiplying or dividing an $m$-digit multiple-precision intger by a single precision integer can be completed in $O(m)$ time, so this is no trouble. 
+
+In general, Toom-3 runs in $O(n^{log(2k-1)/logk})$, which can be improved by taking K adaptively, optimal is shown to be $k=2^{\lceil \log r \rceil}$ where each input is broken in $k$ parts each of size $r$. This gives an asymptotic running time of $O(n2^{\sqrt{\log n}})$ for the optimal Toom-Cook method. **Unfortunately, practical implementation do not behave well for $k\geq 4$**.
+
+
+## FFT-Based (Fast Fourier Transform) Multiplication 
